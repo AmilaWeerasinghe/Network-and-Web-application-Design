@@ -48,18 +48,35 @@ public class UDPServer
          DatagramPacket packet = new DatagramPacket( new byte[packetsize], packetsize ) ;
 
 
-         for( ;; )
-         {
-            
-            // Receive a packet (blocking)
-            socket.receive( packet ) ;
+         /*Exercise 4: The server receives one packet and sends one packet at each
+          iteration of the „for‟ loop. If the program throws an exception at receiving a packet,
+          what will happen to the „for‟ loop?
+           For loop will stop */
+         /*
+         * If this error might be temporary and could affect only one or few packets received,
+          * do you think that this is the suitable behavior for the server?
+          * No this throwing exception would cause server to stop*/
 
-            // Print the packet
-            System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()) ) ;
+         /*If not, modify the server code such that the server deals with such problems.
+             //Solution is to use seperate try catch blocks for server part and clinet associated part
+        */
 
-            // Return the packet to the sender
-            socket.send( packet ) ;
-        }  
+         try {
+             for (; ; ) {
+
+                 // Receive a packet (blocking)
+                 socket.receive(packet);
+
+                 // Print the packet
+                 System.out.println(packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()));
+
+                 // Return the packet to the sender
+                 socket.send(packet);
+             }
+         }
+         catch (Exception  e){
+
+         }
      }
      catch( Exception e )
      {

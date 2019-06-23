@@ -27,6 +27,7 @@ public class UDPClient
       }
 
       //Q1: Create a datagram socket object here
+      DatagramSocket socket=null;
 
 	 
 	  
@@ -37,11 +38,11 @@ public class UDPClient
          int port         = Integer.parseInt( args[1] ) ;
 
          //Q1: Construct the socket
-          socket = new DatagramSocket() ;
+         socket = new DatagramSocket() ;
          //Client does not need to provide the port number. Server will recieve the port number by the packet sent from the client
     
 
-         byte [] data = "The message watnts to pass".getBytes() ;
+         byte [] data = "The message wants to pass".getBytes() ;
 		 
          //Q2: Construct the datagram packet
          DatagramPacket packet=new DatagramPacket(data,data.length,host,port);
@@ -60,6 +61,7 @@ public class UDPClient
 
          // Print the response
          System.out.println( new String(packet.getData()) ) ;
+
       }
       catch( Exception e )
       {
